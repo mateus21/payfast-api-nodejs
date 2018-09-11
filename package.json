@@ -1,0 +1,20 @@
+{
+  "name": "payfast",
+  "version": "1.0.0",
+  "description": "Um gateway para pagamentos através de recursos HTTP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gateway",
+    "pagamentos",
+    "api"
+  ],
+  "author": "Mateus Mantovani",
+  "license": "ISC",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "express": "^4.16.3"
+  }
+}
