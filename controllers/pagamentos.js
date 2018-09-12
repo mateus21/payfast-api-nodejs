@@ -3,6 +3,26 @@ module.exports = function(app) {
          res.send('ok');
     });
 
+    app.delete('/pagamentos/pagamento/:id', function(req, res) {
+        var pagamento = {};
+        var id = req.params.id;
+
+        pagamento.id = id;
+        pagamento.status = 'CANCELADO';
+
+        var connection = app.persistencia.connectionFactory();
+        var pagamentoDao = new app.persistencia.PagamentoDao(connection);
+
+        pagamentoDao.atualiza(pagamento, function(erro) {
+            if(erro) {
+                res.status(500).send(erro);
+                return;
+            }
+
+            res.status(204).send(pagamento);
+        });
+    });
+
     app.put('/pagamentos/pagamento/:id', function(req, res) {
         var pagamento = {};
         var id = req.params.id;
@@ -19,7 +39,7 @@ module.exports = function(app) {
                 return;
             }
 
-            res.send(pagamento);
+            res.status(204).send(pagamento);
         });
     });
 
@@ -35,6 +55,7 @@ module.exports = function(app) {
         if (erros) {
             console.log('Erros de validacao encontrados');
             res.status(400).send(erros);
+            return;
         }
 
         pagamento.status = 'CRIADO';
@@ -49,8 +70,27 @@ module.exports = function(app) {
             } else {
                 console.log('pagamento criado');
 
-                res.location('/pagamentos/pagamento/' + result.insertId);
-                res.status(201).json(pagamento);
+                pagamento.id = result.insertId
+
+                res.location('/pagamentos/pagamento/' + pagamento.id);
+
+                var response = {
+                    dados_do_pagamento: pagamento,
+                    links: [
+                        {
+                            href:"http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
+                            rel:"confirmar",
+                            method:"PUT"
+                        },
+                        {
+                            href:"http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
+                            rel:"cancelar",
+                            method:"DELETE"
+                        }
+                    ]
+                }
+
+                res.status(201).json(response);
             }
         });
     });
