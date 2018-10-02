@@ -1,7 +1,7 @@
 # Payfast api em Nodejs
 Este projeto consiste em uma aplicação desenvolvida em NodeJS. Ela foi desenvolvida com o propósito de criar um ambiente para realizar testes na criação de uma API Rest.
 
-##Tecnologias utilizadas
+## Tecnologias utilizadas
 Para o desenvolvimento desse projeto foram utilizados os seguintes pacotes do NPM:
 
 Express.js
