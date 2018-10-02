@@ -4,10 +4,10 @@ Este projeto consiste em uma aplicação desenvolvida em NodeJS. Ela foi desenvo
 ## Tecnologias utilizadas
 Para o desenvolvimento desse projeto foram utilizados os seguintes pacotes do NPM:
 
-Express.js
-Consign
-BodyParser
-ExpressValidator
+- Express.js
+- Consign
+- BodyParser
+- ExpressValidator
 
 #### Express.js
 O Express é um framework para Node.js utilizado para o desenvolvimento de aplicações web e APIs. Com ele é possível definir regras como: rotas, verbos HTTP e Middleware.
